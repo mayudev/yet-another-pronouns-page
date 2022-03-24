@@ -9,7 +9,7 @@
 
   transition: background 0.2s ease-in-out;
   background: var(--accent);
-  color: var(--foreground);
+  color: var(--text-white);
 
   &:hover {
     background: var(--accent-secondary);

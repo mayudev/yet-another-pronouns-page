@@ -1,0 +1,33 @@
+@use "variables";
+@use "colors";
+@use "themes/light";
+@use "themes/dark";
+@use "button";
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Ubuntu Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--background);
+  color: var(--foreground);
+  font-display: fallback;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

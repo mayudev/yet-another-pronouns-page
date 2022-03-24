@@ -1,0 +1,22 @@
+.button {
+  all: unset;
+  padding: 12px;
+  font-weight: 700;
+  border-radius: var(--radius);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: background 0.2s ease-in-out;
+  background: var(--accent);
+  color: var(--foreground);
+
+  &:hover {
+    background: var(--accent-secondary);
+  }
+}
+
+.button--success {
+  background: var(--success);
+  color: var(--foreground);
+}

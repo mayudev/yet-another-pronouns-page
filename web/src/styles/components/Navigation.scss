@@ -24,6 +24,7 @@
 
 .navigation__entry--primary {
   background: var(--accent);
+  color: var(--text-black);
 
   &:hover {
     background: var(--accent-secondary);

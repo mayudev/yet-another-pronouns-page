@@ -1,7 +1,22 @@
 footer {
+  display: flex;
   margin: 20px;
 }
 
 .footer__item {
   padding-right: 10px;
+}
+
+.item__text {
+  padding-left: 10px;
+}
+
+.item__clickable {
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    color: var(--accent);
+  }
 }

@@ -5,6 +5,8 @@ export interface ILoginContext {
   username: string;
 }
 
+export interface IUser {}
+
 export const LoginContext = createContext<ILoginContext>({
   loggedIn: false,
   username: "",

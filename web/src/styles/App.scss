@@ -1,0 +1,24 @@
+$transitionDuration: 0.3s;
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  transition: opacity $transitionDuration ease-in-out;
+}
+
+.covert {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Modal transition */
+.modal-exit {
+  opacity: 1;
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transition: opacity $transitionDuration ease-in-out;
+}

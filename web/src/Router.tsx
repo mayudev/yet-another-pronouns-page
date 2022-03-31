@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import App from "./App";
 import Landing from "./pages/Landing";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 
@@ -10,6 +11,7 @@ function Router() {
       <Route path="*" element={<App />}>
         <Route index element={<Landing />} />
         <Route path="@:name" element={<Profile />} />
+        <Route path="login" element={<Login />} />
         {/* 404 route */}
         <Route path="*" element={<NotFound />} />
       </Route>

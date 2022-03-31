@@ -3,10 +3,32 @@ import { faCircleInfo, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "../styles/components/Navigation.scss";
 import SearchBar from "./controls/SearchBar";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LoginContext } from "../lib/loginContext";
 
 function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");
+  const context = useContext(LoginContext);
+
+  const loginButton = (
+    <Link
+      className="navigation__entry navigation__entry--link navigation__entry--primary"
+      to="login"
+    >
+      <FontAwesomeIcon icon={faCircleUser} />
+      <span className="entry__title">Login</span>
+    </Link>
+  );
+
+  const logoutButton = (
+    <a
+      href="/api/discord/logout"
+      className="navigation__entry navigation__entry--link navigation__entry--primary"
+    >
+      <FontAwesomeIcon icon={faCircleUser} />
+      <span className="entry__title">Log out</span>
+    </a>
+  );
 
   return (
     <nav className="navigation">
@@ -20,13 +42,7 @@ function Navigation() {
         onChange={setSearchQuery}
         placeholder="Look for a user..."
       />
-      <Link
-        className="navigation__entry navigation__entry--link navigation__entry--primary"
-        to="login"
-      >
-        <FontAwesomeIcon icon={faCircleUser} />
-        <span className="entry__title">Login</span>
-      </Link>
+      {context.loggedIn ? logoutButton : loginButton}
     </nav>
   );
 }

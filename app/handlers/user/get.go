@@ -1,4 +1,4 @@
-package handlers
+package userHandler
 
 import (
 	"strings"
@@ -16,9 +16,16 @@ type Response struct {
 	Data    interface{}
 }
 
+type User struct {
+	ID       uuid.UUID        `json:"id"`
+	Username string           `json:"username"`
+	Pronouns []models.Pronoun `json:"pronouns"`
+}
+
 func GetUser(c *fiber.Ctx) error {
 	db := database.DB
 	var user models.User
+	var pronouns []models.Pronoun
 
 	query := c.Params("userId")
 
@@ -32,7 +39,7 @@ func GetUser(c *fiber.Ctx) error {
 		)
 	}
 
-	db.Where("username = ?", strings.ToLower(query)).Find(&user)
+	db.Where("LOWER(username) = ?", strings.ToLower(query)).Find(&user)
 
 	if user.ID == uuid.Nil {
 		return c.Status(404).JSON(fiber.Map{
@@ -42,9 +49,17 @@ func GetUser(c *fiber.Ctx) error {
 		})
 	}
 
+	db.Where("user_id = ?", user.ID).Find(&pronouns)
+
+	returnData := User{
+		ID:       user.ID,
+		Username: user.Username,
+		Pronouns: pronouns,
+	}
+
 	return c.JSON(fiber.Map{
 		"status":  "success",
 		"message": "Users found",
-		"data":    user,
+		"data":    returnData,
 	})
 }

@@ -6,11 +6,11 @@ import (
 )
 
 type Pronoun struct {
-	gorm.Model
-	User    User
-	UserID  uuid.UUID `gorm:"type:uuid"`
-	Pronoun string
-	Order   int
+	gorm.Model `json:"-"`
+	User       User      `json:"-"`
+	UserID     uuid.UUID `gorm:"type:uuid" json:"userId"`
+	Pronoun    string    `json:"pronoun"`
+	Order      int       `json:"order"`
 }
 
 type User struct {

@@ -2,12 +2,12 @@ package router
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/mayudev/yet-another-pronouns-page/app/handlers"
+	userHandler "github.com/mayudev/yet-another-pronouns-page/app/handlers/user"
 )
 
 func SetupUserRoutes(router fiber.Router) {
 	user := router.Group("/user")
 
 	// Get a user
-	user.Get("/:userId", handlers.GetUser)
+	user.Get("/:userId", userHandler.GetUser)
 }

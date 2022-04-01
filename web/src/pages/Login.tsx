@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../lib/loginContext";
+import { LoginContext } from "../lib/context/login";
 import "../styles/pages/Login.scss";
 
 function Login() {
@@ -12,6 +12,7 @@ function Login() {
     if (context.loggedIn) {
       navigation("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -4,7 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Navigation from "./components/Navigation";
-import { ILoginContext, LoginContext } from "./lib/loginContext";
+import { ILoginContext, LoginContext } from "./lib/context/login";
 import "./styles/App.scss";
 
 function App() {
@@ -19,6 +19,8 @@ function App() {
     fetch("/api/discord/me", { credentials: "include" }).then((resp) => {
       if (resp.ok) {
         setLoginState((loginState) => ({ ...loginState, loggedIn: true }));
+        setReady(true);
+      } else {
         setReady(true);
       }
     });

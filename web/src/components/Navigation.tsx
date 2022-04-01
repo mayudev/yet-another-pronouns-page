@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/components/Navigation.scss";
 import SearchBar from "./controls/SearchBar";
 import { useContext, useState } from "react";
-import { LoginContext } from "../lib/loginContext";
+import { LoginContext } from "../lib/context/login";
 
 function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -37,6 +37,6 @@ func ConnectDB() {
 		log.Fatalln("failed to connect to database")
 	}
 
-	DB.AutoMigrate(&model.User{}, &model.Pronoun{})
+	DB.AutoMigrate(&model.User{}, &model.Pronoun{}, &model.Session{})
 	log.Println("you have connected to database wow")
 }

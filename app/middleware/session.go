@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/mayudev/yet-another-pronouns-page/app/database"
+	"github.com/mayudev/yet-another-pronouns-page/app/model"
 	"github.com/mayudev/yet-another-pronouns-page/app/util"
 )
 
@@ -27,7 +29,7 @@ var Sessions = map[string]Session{}
 // NewSession generates a new token and creates a new session using it
 func NewSession(platform string, platformToken string) (string, time.Time, error) {
 	// Generate secure token
-	b := make([]byte, 32)
+	b := make([]byte, 16)
 	_, err := rand.Read(b)
 
 	if err != nil {
@@ -39,29 +41,55 @@ func NewSession(platform string, platformToken string) (string, time.Time, error
 	// Set expiry date
 	expiresAt := time.Now().Add(120 * time.Minute)
 
-	Sessions[sessionToken] = Session{
+	// Add session to database
+	session := model.Session{
+		Token:         sessionToken,
 		Platform:      platform,
 		PlatformToken: platformToken,
-		Expiry:        expiresAt,
+		Expires:       expiresAt,
+	}
+
+	result := database.DB.Create(&session)
+	if result.Error != nil {
+		return "", time.Time{}, err
 	}
 
 	return sessionToken, expiresAt, nil
 }
 
 // GetSession looks for associated session
-func GetSession(sessionToken string) (Session, error) {
-	v, ok := Sessions[sessionToken]
+func GetSession(sessionToken string) (model.Session, error) {
+	var session model.Session
 
-	if !ok {
-		return Session{}, errors.New("Not found")
+	result := database.DB.First(&session, "token = ?", sessionToken)
+
+	if result.RowsAffected != 1 {
+		return model.Session{}, errors.New("Not found")
 	}
 
-	if v.IsExpired() {
-		delete(Sessions, sessionToken)
-		return Session{}, errors.New("Token expired")
+	if session.IsExpired() {
+		// Delete from database
+		database.DB.Unscoped().Delete(&session)
+
+		return model.Session{}, errors.New("Token expired")
 	}
 
-	return v, nil
+	return session, nil
+}
+
+// DestroySessions destroys a session and returns it
+func DestroySession(sessionToken string) (model.Session, error) {
+	var session model.Session
+
+	result := database.DB.First(&session, "token = ?", sessionToken)
+
+	if result.RowsAffected != 1 {
+		return model.Session{}, errors.New("Not found")
+	}
+
+	database.DB.Unscoped().Delete(&session)
+
+	return session, nil
 }
 
 // SessionMiddleware verifies if user is currently authenticated

@@ -19,7 +19,7 @@ func RevokeToken(c *fiber.Ctx) error {
 		return c.Redirect("/")
 	}
 
-	session, err := middleware.GetSession(token)
+	session, err := middleware.DestroySession(token)
 
 	// Token is already revoked (probably)
 	if err != nil {

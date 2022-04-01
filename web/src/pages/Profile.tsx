@@ -14,6 +14,7 @@ function Profile() {
       alert(mayu);
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <h1>Profile {params.name}</h1>;

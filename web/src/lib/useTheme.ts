@@ -13,6 +13,7 @@ export const useTheme = () => {
     if (localTheme === "light") {
       toggle();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -1,3 +1,6 @@
+.vscode/
+__*
+
 build/
 tmp/
 

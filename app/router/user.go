@@ -2,12 +2,12 @@ package router
 
 import (
 	"github.com/gofiber/fiber/v2"
-	userHandler "github.com/mayudev/yet-another-pronouns-page/app/handlers/user"
+	userHandler "github.com/mayudev/yet-another-pronouns-page/app/handler/user"
+	"github.com/mayudev/yet-another-pronouns-page/app/middleware"
 )
 
-func SetupUserRoutes(router fiber.Router) {
-	user := router.Group("/user")
-
-	// Get a user
-	user.Get("/:userId", userHandler.GetUser)
+func AddUserRoutes(r fiber.Router) {
+	r.Get("/user/:username", userHandler.GetUserByUsername)
+	r.Get("/id/:userID", userHandler.GetUserByID)
+	r.Get("/me", middleware.SessionMiddleware, userHandler.GetCurrentUser)
 }

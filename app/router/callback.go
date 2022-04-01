@@ -5,7 +5,6 @@ import (
 	"github.com/mayudev/yet-another-pronouns-page/app/handler/login"
 )
 
-func AddLoginRoutes(r fiber.Router) {
-	r.Get("discord", login.DiscordLogin)
-	r.Get("logout", login.RevokeToken)
+func AddCallbackRoutes(r fiber.Router) {
+	r.Get("discord", login.DiscordCallback)
 }

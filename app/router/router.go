@@ -1,18 +1,17 @@
 package router
 
-import (
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/mayudev/yet-another-pronouns-page/app/handlers"
-)
+import "github.com/gofiber/fiber/v2"
 
 func SetupRoutes(app *fiber.App) {
-	api := app.Group("/api", logger.New())
+	// Public routes
+	api := app.Group("api/v1")
+	AddUserRoutes(api)
 
-	// Setup /api/me route
-	api.Get("/me", handlers.UserInfo)
+	// Login API
+	login := app.Group("api/login")
+	AddLoginRoutes(login)
 
-	SetupUserRoutes(api)
-	SetupLoginRouter(api)
-
+	// Login callback API
+	callback := app.Group("api/callback")
+	AddCallbackRoutes(callback)
 }

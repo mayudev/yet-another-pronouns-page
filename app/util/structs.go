@@ -3,8 +3,8 @@ package util
 import "fmt"
 
 type ErrorMessage struct {
-	Status  string
-	Message string
+	Status  string `json:"status"`
+	Message string `json:"message"`
 }
 
 type FetchError struct {

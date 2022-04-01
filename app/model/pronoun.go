@@ -1,4 +1,4 @@
-package models
+package model
 
 import (
 	"github.com/google/uuid"
@@ -8,15 +8,7 @@ import (
 type Pronoun struct {
 	gorm.Model `json:"-"`
 	User       User      `json:"-"`
-	UserID     uuid.UUID `gorm:"type:uuid" json:"userId"`
+	UserID     uuid.UUID `gorm:"type:uuid" json:"-"`
 	Pronoun    string    `json:"pronoun"`
 	Order      int       `json:"order"`
-}
-
-type User struct {
-	gorm.Model
-	ID         uuid.UUID `gorm:"type:uuid"`
-	Username   string
-	Platform   string
-	PlatformID string
 }

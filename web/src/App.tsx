@@ -16,7 +16,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("/api/discord/me", { credentials: "include" }).then((resp) => {
+    fetch("/api/me", { credentials: "include" }).then((resp) => {
       if (resp.ok) {
         setLoginState((loginState) => ({ ...loginState, loggedIn: true }));
         setReady(true);

@@ -7,13 +7,16 @@ import (
 
 type Pronoun struct {
 	gorm.Model
+	User    User
+	UserID  uuid.UUID `gorm:"type:uuid"`
 	Pronoun string
 	Order   int
 }
 
 type User struct {
 	gorm.Model
-	UserID   uuid.UUID `gorm:"type:uuid"`
-	Username string
-	Platform string
+	ID         uuid.UUID `gorm:"type:uuid"`
+	Username   string
+	Platform   string
+	PlatformID string
 }

@@ -14,9 +14,6 @@ func SetupLoginRouter(router fiber.Router) {
 	// Callback
 	discord.Get("/callback", handlers.DiscordCallback)
 
-	// User information
-	discord.Get("/me", handlers.DiscordUserInfo)
-
 	// Logout
 	discord.Get("/logout", handlers.DiscordLogout)
 }

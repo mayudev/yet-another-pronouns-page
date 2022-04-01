@@ -21,19 +21,6 @@ type TokenResponse struct {
 	TokenType    string `json:"token_type"`
 }
 
-type DiscordUser struct {
-	Id            string `json:"id"`
-	Username      string `json:"username"`
-	Discriminator string `json:"discriminator"`
-	Avatar        string `json:"avatar,omitempty"`
-	PublicFlags   int    `json:"public_flags,omitempty"`
-	Flags         int    `json:"flags,omitempty"`
-	Banner        string `json:"banner,omitempty"`
-	AccentColor   int    `json:"accent_color,omitempty"`
-	Locale        string `json:"locale,omitempty"`
-	MfaEnabled    bool   `json:"mfa_enabled,omitempty"`
-}
-
 const API_ENDPOINT = "https://discord.com/api"
 
 // TODO move to env
@@ -48,7 +35,6 @@ func DiscordCallback(c *fiber.Ctx) error {
 	code := c.Query("code")
 
 	if len(code) == 0 {
-		fmt.Println("b?")
 		return c.SendStatus(http.StatusUnauthorized)
 	}
 
@@ -81,12 +67,19 @@ func DiscordCallback(c *fiber.Ctx) error {
 		return c.SendStatus(http.StatusInternalServerError)
 	}
 
-	cookie := new(fiber.Cookie)
-	cookie.Name = "token"
-	cookie.Value = tokenResponse.AccessToken
-	cookie.Expires = time.Now().Add(24 * time.Hour)
+	token := new(fiber.Cookie)
+	token.Name = "token"
+	token.Value = tokenResponse.AccessToken
+	token.Expires = time.Now().Add(24 * time.Hour)
 
-	c.Cookie(cookie)
+	c.Cookie(token)
+
+	tokenType := new(fiber.Cookie)
+	tokenType.Name = "token_type"
+	tokenType.Value = "discord"
+	tokenType.Expires = time.Now().Add(24 * time.Hour)
+
+	c.Cookie(tokenType)
 
 	return c.Redirect("/")
 }
@@ -124,48 +117,4 @@ func DiscordLogout(c *fiber.Ctx) error {
 
 	c.ClearCookie("token")
 	return c.SendString(string(body))
-}
-
-func DiscordUserInfo(c *fiber.Ctx) error {
-	token := c.Cookies("token")
-
-	if len(token) == 0 {
-		return c.SendStatus(http.StatusUnauthorized)
-	}
-
-	client := http.Client{}
-	req, err := http.NewRequest("GET", API_ENDPOINT+"/users/@me", nil)
-	if err != nil {
-		log.Println("Couldn't make a new request:", err)
-		return c.SendStatus(http.StatusInternalServerError)
-	}
-
-	req.Header.Set("Authorization", "Bearer "+token)
-
-	if err != nil {
-		return c.SendStatus(http.StatusInternalServerError)
-	}
-
-	resp, err := client.Do(req)
-	if err != nil || resp.StatusCode != http.StatusOK {
-		log.Println("Request failed:", err)
-		return c.SendStatus(http.StatusUnauthorized)
-	}
-
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println("Body reading failed:", err)
-		return c.SendStatus(http.StatusInternalServerError)
-	}
-
-	user := DiscordUser{}
-	err = json.Unmarshal(body, &user)
-
-	if err != nil {
-		log.Println("Unmarshaling failed", err)
-		return c.SendStatus(http.StatusInternalServerError)
-	}
-
-	return c.JSON(user)
 }

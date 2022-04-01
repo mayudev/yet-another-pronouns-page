@@ -34,7 +34,7 @@ func GetUser(c *fiber.Ctx) error {
 
 	db.Where("username = ?", strings.ToLower(query)).Find(&user)
 
-	if user.UserID == uuid.Nil {
+	if user.ID == uuid.Nil {
 		return c.Status(404).JSON(fiber.Map{
 			"status":  "error",
 			"message": "User not found",

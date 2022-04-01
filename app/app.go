@@ -1,6 +1,7 @@
 package app
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -8,10 +9,7 @@ import (
 	"github.com/mayudev/yet-another-pronouns-page/app/router"
 )
 
-type App struct {
-}
-
-func (a *App) Start(port int) {
+func Start(port int) {
 	// Start a new fiber app
 	app := fiber.New()
 
@@ -26,5 +24,8 @@ func (a *App) Start(port int) {
 	app.Static("/*", "./build")
 
 	// Listen on specified port
-	app.Listen(":" + strconv.Itoa(port))
+	err := app.Listen(":" + strconv.Itoa(port))
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

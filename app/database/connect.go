@@ -38,5 +38,8 @@ func ConnectDB() {
 	}
 
 	DB.AutoMigrate(&model.User{}, &model.Pronoun{}, &model.Session{})
+
+	CleanupExpiredSessions()
+
 	log.Println("you have connected to database wow")
 }

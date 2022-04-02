@@ -1,5 +1,7 @@
 .button {
   all: unset;
+  display: inline-block;
+
   padding: 12px;
   font-weight: 700;
   border-radius: var(--radius);

@@ -13,6 +13,7 @@ import (
 
 type updateUser struct {
 	Username string
+	Bio      string
 	Pronouns []model.Pronoun
 }
 
@@ -27,7 +28,7 @@ func UpdateUser(c *fiber.Ctx) error {
 	}
 
 	// Find currently logged user in DB
-	user := &model.User{}
+	user := model.User{}
 	database.DB.Where("id = ?", session.UserID).First(&user)
 
 	// Somehow, user is not in the database
@@ -78,6 +79,22 @@ func UpdateUser(c *fiber.Ctx) error {
 		wasModified = true
 	}
 
+	// Bio is to be updated
+	if len(updateUserData.Bio) > 0 {
+		// Check max bio length
+		if len(updateUserData.Bio) > 1000 {
+			return c.Status(413).JSON(
+				util.ErrorMessage{
+					Status:  "error",
+					Message: "Bio too long",
+				},
+			)
+		}
+
+		user.Bio = updateUserData.Bio
+		wasModified = true
+	}
+
 	// Pronouns are to be updated
 	var pronouns []model.Pronoun
 
@@ -111,5 +128,9 @@ func UpdateUser(c *fiber.Ctx) error {
 		database.DB.Save(&user)
 	}
 
-	return c.Status(200).JSON(user)
+	returnData := model.UserResponse{
+		User:     user,
+		Pronouns: pronouns,
+	}
+	return c.Status(200).JSON(returnData)
 }

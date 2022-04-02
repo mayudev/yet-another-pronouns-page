@@ -9,7 +9,7 @@ function Profile() {
 
   useEffect(() => {
     async function fetchData() {
-      const resp = await fetch("/api/user/" + params.name);
+      const resp = await fetch("/api/v1/user/" + params.name);
       const mayu = await resp.text();
       alert(mayu);
     }

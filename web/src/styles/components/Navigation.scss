@@ -1,31 +1,27 @@
 .navigation {
   margin: 20px;
   display: flex;
-  border: 2px solid var(--accent);
   border-radius: 4px;
 }
 
 .navigation__entry {
   padding: var(--menu-padding);
+  border-radius: 4px;
 }
 
 .navigation__entry--link {
-  font-weight: 700;
-  transition: background 0.15s ease-in-out;
-
+  transition: color 0.15s ease-in-out;
   &:hover {
-    background: var(--accent);
-  }
-
-  &:active {
-    background: var(--accent-secondary);
+    color: var(--accent);
   }
 }
 
 .navigation__entry--primary {
   background: var(--accent);
   color: var(--text-black);
+  font-weight: 700;
 
+  transition: background 0.15s ease-in-out;
   &:hover {
     background: var(--accent-secondary);
   }

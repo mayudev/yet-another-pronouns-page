@@ -1,20 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "../styles/components/Navigation.scss";
-import SearchBar from "./controls/SearchBar";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { LoginContext } from "../lib/context/login";
 
 function Navigation() {
-  const [searchQuery, setSearchQuery] = useState("");
   const context = useContext(LoginContext);
 
   const loginButton = (
-    <Link
-      className="navigation__entry navigation__entry--link navigation__entry--primary"
-      to="login"
-    >
+    <Link className="navigation__entry navigation__entry--primary" to="login">
       <FontAwesomeIcon icon={faCircleUser} />
       <span className="entry__title">Login</span>
     </Link>
@@ -23,7 +18,7 @@ function Navigation() {
   const logoutButton = (
     <a
       href="/api/discord/logout"
-      className="navigation__entry navigation__entry--link navigation__entry--primary"
+      className="navigation__entry navigation__entry--primary"
     >
       <FontAwesomeIcon icon={faCircleUser} />
       <span className="entry__title">Log out</span>
@@ -32,16 +27,10 @@ function Navigation() {
 
   return (
     <nav className="navigation">
-      <span className="navigation__entry">yet another pronouns page</span>
-      <Link className="navigation__entry navigation__entry--link" to="/">
-        <FontAwesomeIcon icon={faCircleInfo} />
-        <span className="entry__title">About</span>
+      <Link to="/" className="navigation__entr navigation__entry--link">
+        <span className="entry__title">yet another pronouns page</span>
       </Link>
-      <SearchBar
-        value={searchQuery}
-        onChange={setSearchQuery}
-        placeholder="Look for a user..."
-      />
+      <span style={{ flex: 1 }} />
       {context.loggedIn ? logoutButton : loginButton}
     </nav>
   );

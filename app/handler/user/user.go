@@ -95,7 +95,7 @@ func GetCurrentUser(c *fiber.Ctx) error {
 	session, err := middleware.GetSession(token)
 	if err != nil {
 		// This shouldn't ever happen so don't worry about it (or should it?)
-		c.SendStatus(401)
+		return c.SendStatus(401)
 	}
 
 	if session.Platform == "discord" {
@@ -124,18 +124,14 @@ func GetCurrentUser(c *fiber.Ctx) error {
 		user := &model.User{}
 		db.Where("platform = ? AND platform_id = ?", "discord", userInfo.ID).First(&user)
 
-		// User is not registered
+		// User does not exist (should have been registered on login)
 		if user.ID == uuid.Nil {
-			createdUser, err := createUser("discord", userInfo.ID)
-
 			if err != nil {
-				return c.Status(500).JSON(util.ErrorMessage{
+				return c.Status(404).JSON(util.ErrorMessage{
 					Status:  "error",
-					Message: "Couldn't register user",
+					Message: "User not found",
 				})
 			}
-
-			return c.JSON(createdUser)
 		}
 
 		return c.JSON(user)
@@ -148,7 +144,7 @@ func GetCurrentUser(c *fiber.Ctx) error {
 }
 
 // createUser creates a new User record in database, associated with platform
-func createUser(platform string, platformId string) (*model.User, error) {
+func CreateUser(platform string, platformId string) (*model.User, error) {
 	user := new(model.User)
 
 	user.ID = uuid.New()

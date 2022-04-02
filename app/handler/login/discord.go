@@ -8,7 +8,12 @@ import (
 	"net/url"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
+	"github.com/mayudev/yet-another-pronouns-page/app/api"
+	"github.com/mayudev/yet-another-pronouns-page/app/database"
+	userHandler "github.com/mayudev/yet-another-pronouns-page/app/handler/user"
 	"github.com/mayudev/yet-another-pronouns-page/app/middleware"
+	"github.com/mayudev/yet-another-pronouns-page/app/model"
 	"github.com/mayudev/yet-another-pronouns-page/app/util"
 )
 
@@ -72,8 +77,38 @@ func DiscordCallback(c *fiber.Ctx) error {
 		return c.Redirect("/?error=Internal server error")
 	}
 
+	// Fetch user data
+	userInfo, err := api.FetchDiscordUserInfo(tokenResponse.AccessToken)
+	if err != nil {
+		log.Println("Couldn't fetch user info!", err)
+		return c.Redirect("/?error=Internal server error")
+	}
+
+	// Find registered user in database
+	db := database.DB
+
+	user := &model.User{}
+	userId := uuid.UUID{}
+
+	db.Where("platform = ? AND platform_id = ?", "discord", userInfo.ID).First(&user)
+
+	// Check if user is registered
+	if user.ID == uuid.Nil {
+		createdUser, err := userHandler.CreateUser("discord", userInfo.ID)
+
+		if err != nil {
+			log.Println("Couldn't register user!", err)
+			return c.Redirect("/?error=Internal server error")
+		}
+
+		userId = createdUser.ID
+	} else {
+		userId = user.ID
+	}
+
 	// Generate session token
-	token, expiry, err := middleware.NewSession("discord", tokenResponse.AccessToken)
+	token, expiry, err := middleware.NewSession("discord", tokenResponse.AccessToken, userId)
+
 	if err != nil {
 		log.Println("Couldn't generate a token!", err)
 		return c.Redirect("/?error=Internal server error")

@@ -7,27 +7,14 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 	"github.com/mayudev/yet-another-pronouns-page/app/database"
 	"github.com/mayudev/yet-another-pronouns-page/app/model"
 	"github.com/mayudev/yet-another-pronouns-page/app/util"
 )
 
-type Session struct {
-	Platform      string
-	PlatformToken string
-	Expiry        time.Time
-}
-
-// IsExpired returns true if session has expired
-func (s *Session) IsExpired() bool {
-	return s.Expiry.Before(time.Now())
-}
-
-// Sessions stores active sessions
-var Sessions = map[string]Session{}
-
 // NewSession generates a new token and creates a new session using it
-func NewSession(platform string, platformToken string) (string, time.Time, error) {
+func NewSession(platform string, platformToken string, userID uuid.UUID) (string, time.Time, error) {
 	// Generate secure token
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
@@ -44,6 +31,7 @@ func NewSession(platform string, platformToken string) (string, time.Time, error
 	// Add session to database
 	session := model.Session{
 		Token:         sessionToken,
+		UserID:        userID,
 		Platform:      platform,
 		PlatformToken: platformToken,
 		Expires:       expiresAt,

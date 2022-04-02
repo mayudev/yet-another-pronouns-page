@@ -16,7 +16,7 @@ import (
 // NewSession generates a new token and creates a new session using it
 func NewSession(platform string, platformToken string, userID uuid.UUID) (string, time.Time, error) {
 	// Generate secure token
-	b := make([]byte, 16)
+	b := make([]byte, 24)
 	_, err := rand.Read(b)
 
 	if err != nil {

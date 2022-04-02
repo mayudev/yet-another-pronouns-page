@@ -1,7 +1,24 @@
 .error {
-  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.error__text {
-  font-size: 3em;
+.error__header {
+  display: flex;
+  padding-bottom: 12px;
+  align-items: center;
+
+  border-bottom: 3px solid var(--accent);
+}
+
+.header__title {
+  margin-left: 20px;
+  font-size: 2em;
+}
+
+.error__button {
+  margin: 12px;
 }

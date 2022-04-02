@@ -1,3 +1,6 @@
+import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../lib/context/login";
@@ -10,16 +13,20 @@ function Login() {
   useEffect(() => {
     // Check if user is logged in and redirect to home page if yes
     if (context.loggedIn) {
-      navigation("/");
+      //navigation("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [context]);
 
   return (
     <div className="login">
-      <h1>Login</h1>
-      <div className="login__buttons">
+      <div className="login__header">
+        <FontAwesomeIcon icon={faUser} size="2x" />
+        <span className="header__title">Login</span>
+      </div>
+      <div className="login__body">
         <a href="/api/discord/login" className="button login__button">
+          <FontAwesomeIcon className="button__icon" icon={faDiscord} />
           Login with Discord
         </a>
       </div>

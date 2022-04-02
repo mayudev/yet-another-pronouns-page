@@ -1,6 +1,7 @@
 .button {
   all: unset;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 
   padding: 12px;
   font-weight: 700;
@@ -16,6 +17,10 @@
   &:hover {
     background: var(--accent-secondary);
   }
+}
+
+.button__icon {
+  margin-right: 6px;
 }
 
 .button--success {

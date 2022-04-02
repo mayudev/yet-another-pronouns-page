@@ -11,4 +11,5 @@ type Pronoun struct {
 	UserID     uuid.UUID `gorm:"type:uuid" json:"-"`
 	Pronoun    string    `json:"pronoun"`
 	Order      int       `json:"order"`
+	Primary    bool
 }

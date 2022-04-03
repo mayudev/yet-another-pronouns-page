@@ -102,7 +102,7 @@ func UpdateUser(c *fiber.Ctx) error {
 		// Validate all passed data
 
 		for i, k := range updateUserData.Pronouns {
-			if k.Order != i || len(k.Pronoun) == 0 || len(k.Pronoun) > 32 {
+			if k.Order != i || len(k.Pronoun) == 0 || len(k.Pronoun) > 32 || k.Type > 3 {
 				return c.Status(400).JSON(
 					util.ErrorMessage{
 						Status:  "error",

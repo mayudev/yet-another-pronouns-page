@@ -1,6 +1,8 @@
 import { Pronoun, PronounType } from "../../lib/interfaces";
 import PronounIcon from "./PronounIcon";
 import "../../styles/components/profile/Pronouns.scss";
+import ReactTooltip from "react-tooltip";
+import { figureType } from "../../lib/types";
 
 type Props = {
   pronouns: Pronoun[];
@@ -21,17 +23,20 @@ function Pronouns(props: Props) {
   });
 
   const display = pronouns.map((pronoun) => (
-    <div
-      className={`pronoun ${
-        pronoun.type === PronounType.Primary ? "pronoun--primary" : ""
-      }`}
-      key={pronoun.order}
-    >
-      <span className="pronoun__icon">
-        <PronounIcon type={pronoun.type} />
-      </span>
-      <span className="pronoun__value">{pronoun.pronoun}</span>
-    </div>
+    <>
+      <div
+        className={`pronoun ${
+          pronoun.type === PronounType.Primary ? "pronoun--primary" : ""
+        }`}
+        key={pronoun.order}
+      >
+        <span data-tip={figureType(pronoun.type)} className="pronoun__icon">
+          <PronounIcon type={pronoun.type} />
+        </span>
+        <span className="pronoun__value">{pronoun.pronoun}</span>
+      </div>
+      <ReactTooltip className="pronoun__tooltip" effect="solid" />
+    </>
   ));
   return <div className="pronouns">{display}</div>;
 }

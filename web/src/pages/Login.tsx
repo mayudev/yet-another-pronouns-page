@@ -13,7 +13,7 @@ function Login() {
   useEffect(() => {
     // Check if user is logged in and redirect to home page if yes
     if (context.loggedIn) {
-      //navigation("/");
+      navigation("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);

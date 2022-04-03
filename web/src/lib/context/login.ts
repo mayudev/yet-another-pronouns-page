@@ -1,15 +1,19 @@
 import { createContext } from "react";
+import { UserData } from "../interfaces";
 
-export interface ILoginContext {
+export interface ILoginContext extends UserData {
   loggedIn: boolean;
-  username: string;
-  id: string;
+  initalized: boolean;
 }
 
 export interface IUser {}
 
 export const LoginContext = createContext<ILoginContext>({
   loggedIn: false,
+  initalized: false,
   username: "",
   id: "",
+  avatar: "",
+  bio: "",
+  pronouns: [],
 });

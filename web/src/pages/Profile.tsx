@@ -39,8 +39,6 @@ function Profile() {
             setError(404);
           }
         }
-
-        console.log(e);
       }
     }
     fetchData();
@@ -57,7 +55,7 @@ function Profile() {
     return (
       <div className="profile">
         {current.id === loginContext.id ? (
-          <Link to="/profile" className="profile__edit">
+          <Link to="/editor" className="profile__edit">
             <FontAwesomeIcon icon={faPencil} />
             <span className="edit__text">Edit profile</span>
           </Link>

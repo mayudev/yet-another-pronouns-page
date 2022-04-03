@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Navigation from "./components/Navigation";
 import { ILoginContext, LoginContext } from "./lib/context/login";
-import { CurrentUser } from "./lib/interfaces";
+import { UserData } from "./lib/interfaces";
 import "./styles/App.scss";
 
 function App() {
@@ -13,8 +13,12 @@ function App() {
 
   const [loginState, setLoginState] = useState<ILoginContext>({
     loggedIn: false,
+    initalized: false,
     username: "",
     id: "",
+    avatar: "",
+    bio: "",
+    pronouns: [],
   });
 
   useEffect(() => {
@@ -26,16 +30,21 @@ function App() {
           throw new Error(resp.statusText);
         }
 
-        const data = (await resp.json()) as CurrentUser;
+        const data = (await resp.json()) as UserData;
 
         setLoginState((loginState) => ({
           ...loginState,
           loggedIn: true,
+          initalized: true,
           id: data.id,
           username: data.username,
         }));
         setReady(true);
       } catch (e) {
+        setLoginState((loginState) => ({
+          ...loginState,
+          initalized: true,
+        }));
         setReady(true);
       }
     }

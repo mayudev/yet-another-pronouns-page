@@ -1,10 +1,10 @@
-export type UserData = {
+export interface UserData {
   id: string;
   username: string;
   bio: string;
   avatar: string;
   pronouns: Pronoun[];
-};
+}
 
 export enum PronounType {
   Primary,
@@ -18,5 +18,3 @@ export interface Pronoun {
   order: number;
   type: PronounType;
 }
-
-export interface CurrentUser extends Omit<UserData, "pronouns"> {}

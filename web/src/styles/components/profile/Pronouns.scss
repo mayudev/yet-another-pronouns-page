@@ -1,0 +1,30 @@
+.pronouns {
+  margin: 6px 0;
+}
+
+.pronoun {
+  display: flex;
+  align-items: center;
+
+  padding: 6px 0;
+
+  transition: color 0.2s;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.pronoun__icon {
+  flex-basis: 32px;
+  text-align: center;
+}
+
+.pronoun--primary {
+  font-size: 1.5rem;
+}
+
+.pronoun__value {
+  padding-left: 6px;
+}

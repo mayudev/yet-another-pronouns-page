@@ -1,0 +1,13 @@
+.heading {
+  display: inline-flex;
+  padding: 8px;
+  align-items: center;
+  align-self: start;
+
+  border-bottom: 3px solid var(--accent);
+}
+
+.heading__text {
+  margin-left: 20px;
+  font-size: 1.7rem;
+}

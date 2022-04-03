@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Navigation from "./components/Navigation";
 import { ILoginContext, LoginContext } from "./lib/context/login";
+import { CurrentUser } from "./lib/interfaces";
 import "./styles/App.scss";
 
 function App() {
@@ -13,17 +14,33 @@ function App() {
   const [loginState, setLoginState] = useState<ILoginContext>({
     loggedIn: false,
     username: "",
+    id: "",
   });
 
   useEffect(() => {
-    fetch("/api/me", { credentials: "include" }).then((resp) => {
-      if (resp.ok) {
-        setLoginState((loginState) => ({ ...loginState, loggedIn: true }));
+    async function fetchCurrentUser() {
+      try {
+        const resp = await fetch("/api/v1/me");
+
+        if (!resp.ok) {
+          throw new Error(resp.statusText);
+        }
+
+        const data = (await resp.json()) as CurrentUser;
+
+        setLoginState((loginState) => ({
+          ...loginState,
+          loggedIn: true,
+          id: data.id,
+          username: data.username,
+        }));
         setReady(true);
-      } else {
+      } catch (e) {
         setReady(true);
       }
-    });
+    }
+
+    fetchCurrentUser();
   }, []);
 
   return (

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { UserData } from "../lib/interfaces";
 import NotFound from "./NotFound";
 import "../styles/pages/Profile.scss";
 import Header from "../components/profile/Header";
 import Heading from "../components/Heading";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faTag } from "@fortawesome/free-solid-svg-icons";
 import Pronouns from "../components/profile/Pronouns";
+import { LoginContext } from "../lib/context/login";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Params = {
   name: string;
@@ -14,7 +16,7 @@ type Params = {
 function Profile() {
   const [current, setCurrent] = useState<UserData>();
   const [error, setError] = useState(0);
-  const navigate = useNavigate();
+  const loginContext = useContext(LoginContext);
 
   let params = useParams<Params>();
 
@@ -54,6 +56,14 @@ function Profile() {
   if (current) {
     return (
       <div className="profile">
+        {current.id === loginContext.id ? (
+          <Link to="/profile" className="profile__edit">
+            <FontAwesomeIcon icon={faPencil} />
+            <span className="edit__text">Edit profile</span>
+          </Link>
+        ) : (
+          ""
+        )}
         <Header username={current.username} avatar={current.avatar} />
         <div className="profile__bio">{current.bio}</div>
         <Heading icon={faTag} value="Pronouns" />
@@ -63,7 +73,7 @@ function Profile() {
   }
 
   // Page is loading
-  return <h1>Loadifdjhasdfifsduh</h1>;
+  return <div></div>;
 }
 
 export default Profile;

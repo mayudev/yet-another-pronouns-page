@@ -1,5 +1,5 @@
 .profile {
-  width: min(95vw, 1080px);
+  width: min(90vw, 1080px);
   margin: auto;
   height: 100%;
 
@@ -8,7 +8,18 @@
   justify-content: center;
 }
 
-.profile__header {
+.profile__edit {
+  margin: 12px 0;
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.edit__text {
+  padding-left: 6px;
 }
 
 .header__username {
@@ -16,6 +27,7 @@
 }
 
 .profile__bio {
+  margin: 12px 0;
   font-size: 1rem;
   color: var(--foreground-secondary);
 }

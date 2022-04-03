@@ -3,6 +3,7 @@ import { createContext } from "react";
 export interface ILoginContext {
   loggedIn: boolean;
   username: string;
+  id: string;
 }
 
 export interface IUser {}
@@ -10,4 +11,5 @@ export interface IUser {}
 export const LoginContext = createContext<ILoginContext>({
   loggedIn: false,
   username: "",
+  id: "",
 });

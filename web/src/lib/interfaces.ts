@@ -18,3 +18,5 @@ export interface Pronoun {
   order: number;
   type: PronounType;
 }
+
+export interface CurrentUser extends Omit<UserData, "pronouns"> {}

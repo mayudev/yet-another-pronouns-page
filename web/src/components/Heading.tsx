@@ -11,7 +11,7 @@ type Props = {
 function Heading(props: Props) {
   return (
     <span className="heading">
-      {props.icon && <FontAwesomeIcon size="2x" icon={props.icon} />}
+      {props.icon && <FontAwesomeIcon size="1x" icon={props.icon} />}
       <span className="heading__text">{props.value}</span>
     </span>
   );

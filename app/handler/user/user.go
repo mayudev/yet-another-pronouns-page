@@ -99,6 +99,7 @@ func GetCurrentUser(c *fiber.Ctx) error {
 	}
 
 	if session.Platform == "discord" {
+		// TODO remove discord api request
 		userInfo, err := api.FetchDiscordUserInfo(session.PlatformToken)
 		if err != nil {
 			// Check if it's a FetchError
@@ -121,7 +122,7 @@ func GetCurrentUser(c *fiber.Ctx) error {
 
 		db := database.DB
 
-		user := &model.User{}
+		user := model.User{}
 		db.Where("platform = ? AND platform_id = ?", "discord", userInfo.ID).First(&user)
 
 		// User does not exist (should have been registered on login)
@@ -134,7 +135,16 @@ func GetCurrentUser(c *fiber.Ctx) error {
 			}
 		}
 
-		return c.JSON(user)
+		// Find user pronouns
+		var pronouns []model.Pronoun
+		db.Where("user_id = ?", user.ID).Find(&pronouns)
+
+		returnData := model.UserResponse{
+			User:     user,
+			Pronouns: pronouns,
+		}
+
+		return c.JSON(returnData)
 	} else {
 		return c.Status(401).JSON(util.ErrorMessage{
 			Status:  "Error",

@@ -19,6 +19,7 @@ function App() {
     avatar: "",
     bio: "",
     pronouns: [],
+    setUsername: () => {},
   });
 
   useEffect(() => {
@@ -38,6 +39,9 @@ function App() {
           initalized: true,
           id: data.id,
           username: data.username,
+          bio: data.bio,
+          avatar: data.avatar,
+          pronouns: data.pronouns,
         }));
         setReady(true);
       } catch (e) {

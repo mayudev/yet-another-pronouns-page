@@ -13,6 +13,9 @@ func AddUserRoutes(r fiber.Router) {
 	// Get user by ID
 	r.Get("/id/:userID", userHandler.GetUserByID)
 
+	// Check username availability
+	r.Get("/check/:username", userHandler.CheckUsernameAvailable)
+
 	// Get current user
 	r.Get("/me", middleware.SessionMiddleware, userHandler.GetCurrentUser)
 

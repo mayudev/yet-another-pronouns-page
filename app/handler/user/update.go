@@ -49,7 +49,7 @@ func UpdateUser(c *fiber.Ctx) error {
 	}
 
 	// Username is to be updated
-	if len(updateUserData.Username) > 0 {
+	if len(updateUserData.Username) > 1 {
 		// Validate username
 		if len(updateUserData.Username) > 32 ||
 			!util.ValidateUsername(updateUserData.Username) {

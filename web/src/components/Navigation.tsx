@@ -16,10 +16,7 @@ function Navigation() {
   );
 
   const logoutButton = (
-    <a
-      href="/api/discord/logout"
-      className="navigation__entry navigation__entry--primary"
-    >
+    <a href="/api/login/logout" className="navigation__entry navigation__entry--primary">
       <FontAwesomeIcon icon={faCircleUser} />
       <span className="entry__title">Log out</span>
     </a>

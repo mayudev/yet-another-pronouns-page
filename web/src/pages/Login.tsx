@@ -25,7 +25,7 @@ function Login() {
         <span className="header__title">Login</span>
       </div>
       <div className="login__body">
-        <a href="/api/discord/login" className="button login__button">
+        <a href="/api/login/discord" className="button login__button">
           <FontAwesomeIcon className="button__icon" icon={faDiscord} />
           Login with Discord
         </a>

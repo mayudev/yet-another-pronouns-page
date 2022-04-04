@@ -60,13 +60,20 @@ function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange, onRemove }
   return (
     <div className="pronoun_edit">
       <div className="pronoun_edit__reorder">
-        <button onClick={() => remove()} className="pronoun_edit__button">
+        <button
+          onClick={() => remove()}
+          className="pronoun_edit__button"
+          title="Remove"
+          aria-label="Remove"
+        >
           <FontAwesomeIcon icon={faRemove} />
         </button>
         <button
           onClick={() => updateOrder(-1)}
           disabled={pronoun.order === 0}
           className="pronoun_edit__button reorder__arrow"
+          title="Move up"
+          aria-label="Move up"
         >
           <FontAwesomeIcon icon={faArrowUp} />
         </button>
@@ -74,6 +81,8 @@ function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange, onRemove }
           disabled={pronoun.order === pronounsCount - 1}
           onClick={() => updateOrder(1)}
           className="pronoun_edit__button eorder__arrow"
+          title="Move down"
+          aria-label="Move down"
         >
           <FontAwesomeIcon icon={faArrowDown} />
         </button>
@@ -83,12 +92,14 @@ function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange, onRemove }
         value={pronoun.pronoun}
         onChange={(e) => updatePronoun(e.target.value)}
         className="pronoun_edit__input"
+        aria-label="Pronoun"
       />
       <span className="pronoun_edit__types">
         {types.map((type) => (
           <button
             key={type}
             data-tip={figureType(type)}
+            aria-label={figureType(type)}
             className={`pronoun_edit__type pronoun_edit__button ${
               pronoun.type === type ? "pronoun_edit__type--active" : ""
             }`}

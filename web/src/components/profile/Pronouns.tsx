@@ -3,6 +3,7 @@ import PronounIcon from "./PronounIcon";
 import "../../styles/components/profile/Pronouns.scss";
 import ReactTooltip from "react-tooltip";
 import { figureType } from "../../lib/types";
+import React from "react";
 
 type Props = {
   pronouns: Pronoun[];
@@ -23,12 +24,11 @@ function Pronouns(props: Props) {
   });
 
   const display = pronouns.map((pronoun) => (
-    <>
+    <React.Fragment key={pronoun.order}>
       <div
         className={`pronoun ${
           pronoun.type === PronounType.Primary ? "pronoun--primary" : ""
         }`}
-        key={pronoun.order}
       >
         <span data-tip={figureType(pronoun.type)} className="pronoun__icon">
           <PronounIcon type={pronoun.type} />
@@ -36,7 +36,7 @@ function Pronouns(props: Props) {
         <span className="pronoun__value">{pronoun.pronoun}</span>
       </div>
       <ReactTooltip className="pronoun__tooltip" effect="solid" />
-    </>
+    </React.Fragment>
   ));
   return <div className="pronouns">{display}</div>;
 }

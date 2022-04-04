@@ -11,12 +11,14 @@ type Props = {
 function PronounsEditor(props: Props) {
   const loginContext = useContext(LoginContext);
   const [current, setCurrent] = useState<PronounEdited[]>([]);
+  const [edited, setEdited] = useState(false);
 
   const updatePronoun = (i: number, newValue: PronounEdited) => {
     const currentCopy = Array.from(current);
 
     currentCopy[i] = newValue;
     setCurrent(currentCopy);
+    setEdited(true);
   };
 
   const rearrangePronoun = (i: number, diff: number) => {
@@ -31,6 +33,7 @@ function PronounsEditor(props: Props) {
     currentCopy.sort((a, b) => a.order - b.order);
 
     setCurrent(currentCopy);
+    setEdited(true);
   };
 
   const removePronoun = (i: number) => {
@@ -45,6 +48,7 @@ function PronounsEditor(props: Props) {
     }));
 
     setCurrent(currentCopy);
+    setEdited(true);
   };
 
   const addPronoun = (value: string) => {
@@ -63,6 +67,7 @@ function PronounsEditor(props: Props) {
     currentCopy.push(newPronoun);
 
     setCurrent(currentCopy);
+    setEdited(true);
   };
 
   useEffect(() => {
@@ -80,6 +85,7 @@ function PronounsEditor(props: Props) {
   }, [loginContext]);
 
   const submit = async () => {
+    if (!edited) return;
     let body: {
       pronouns: Pronoun[];
     } = {
@@ -106,6 +112,7 @@ function PronounsEditor(props: Props) {
       props.onMessage("Pronouns updated!");
 
       loginContext.pronouns = current;
+      setEdited(false);
     } catch (e) {
       console.log(e);
       props.onMessage("Something went wrong.");
@@ -129,7 +136,7 @@ function PronounsEditor(props: Props) {
           <PronounInput onSubmit={(val) => addPronoun(val)} />
         </div>
       </div>
-      <button onClick={submit} className="button">
+      <button onClick={submit} disabled={!edited} className="button">
         Save
       </button>
     </div>

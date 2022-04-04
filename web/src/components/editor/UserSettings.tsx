@@ -127,7 +127,7 @@ function UserSettings(props: Props) {
             (username === loginContext.username && bio === loginContext.bio)
           }
           onClick={submit}
-          className="button"
+          className="button button--long"
         >
           Save
         </button>

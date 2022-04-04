@@ -136,7 +136,12 @@ function PronounsEditor(props: Props) {
           <PronounInput onSubmit={(val) => addPronoun(val)} />
         </div>
       </div>
-      <button onClick={submit} disabled={!edited} className="button">
+      <button
+        onClick={submit}
+        disabled={!edited}
+        className="button button--long"
+        style={{ margin: "8px" }}
+      >
         Save
       </button>
     </div>

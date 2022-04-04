@@ -10,6 +10,10 @@
   padding: 12px;
 }
 
+.editor > .heading {
+  margin: 12px 0;
+}
+
 .section__setting {
   padding: 6px 0;
 }
@@ -21,6 +25,10 @@
   & > .setting__header {
     padding-right: 12px;
   }
+}
+
+.section__setting:not(.section__setting--inline) > .setting__header {
+  margin-bottom: 6px;
 }
 
 .setting__edit {

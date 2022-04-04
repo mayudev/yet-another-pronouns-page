@@ -1,7 +1,9 @@
 .pronoun_edit {
   border: 1px solid var(--accent);
+  border-radius: var(--radius);
   display: inline-flex;
   margin: 6px 0;
+  overflow: hidden;
 }
 
 .pronoun_edit__button {

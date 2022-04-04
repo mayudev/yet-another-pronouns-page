@@ -5,7 +5,11 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import { LoginContext } from "../../lib/context/login";
 import { UserData } from "../../lib/interfaces";
 
-function UserSettings() {
+type Props = {
+  onMessage(message: string): void;
+};
+
+function UserSettings(props: Props) {
   const loginContext = useContext(LoginContext);
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
@@ -81,10 +85,15 @@ function UserSettings() {
       setUsername(data.username);
       setBio(data.bio);
 
+      props.onMessage("Profile updated!");
+
       // heresy
       loginContext.username = data.username;
       loginContext.bio = data.bio;
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+      props.onMessage("Something went wrong.");
+    }
   };
 
   return (

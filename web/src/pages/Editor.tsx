@@ -1,5 +1,6 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import UserSettings from "../components/editor/UserSettings";
 import Heading from "../components/Heading";
@@ -23,13 +24,28 @@ function Editor() {
     setCurrent(loginContext);
   }, [loginContext]);
 
+  const onMessage = (message: string) => {
+    toast(message);
+  };
+
   if (!current) return <h1>Loading...</h1>;
   return (
     <div className="editor">
       <Heading icon={faUser} value="Profile"></Heading>
-      <UserSettings />
+      <UserSettings onMessage={onMessage} />
       <div className="editor__pane"></div>
       <div className="editor__pane"></div>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: "toaster",
+          iconTheme: {
+            primary: "none",
+            secondary: "none",
+          },
+          duration: 1000,
+        }}
+      />
     </div>
   );
 }

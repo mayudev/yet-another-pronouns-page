@@ -11,6 +11,7 @@ function PronounInput(props: Props) {
   const [value, setValue] = useState("");
 
   const submit = () => {
+    if (value.length === 0 || value.length > 32) return;
     props.onSubmit(value);
     setValue("");
   };

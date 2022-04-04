@@ -9,7 +9,7 @@ function Footer() {
 
   return (
     <footer>
-      <a href="https://github.com/mayudev">
+      <a href="https://github.com/mayudev/yet-another-pronouns-page">
         <FooterItem icon={faGithub} />
       </a>
       <FooterItem value="yet another pronouns page" />

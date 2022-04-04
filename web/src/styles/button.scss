@@ -19,7 +19,6 @@
   }
 
   &:disabled {
-    background: var(--background-primary);
     color: var(--text-white);
     opacity: 0.5;
     cursor: not-allowed;

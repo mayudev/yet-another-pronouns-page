@@ -11,8 +11,6 @@ function UserSettings() {
   const [bio, setBio] = useState("");
   const [usernameStatus, setUsernameStatus] = useState("");
 
-  const usernameRegex = /^[a-zA-Z0-9_]+$/;
-
   useEffect(() => {
     // Load current values from context
     if (loginContext.loggedIn && loginContext.initalized) {
@@ -23,6 +21,7 @@ function UserSettings() {
 
   // Username validation
   useEffect(() => {
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
     const timeout = setTimeout(() => {
       if (username === loginContext.username) return setUsernameStatus("");
 
@@ -49,7 +48,7 @@ function UserSettings() {
         });
     }, 500);
     return () => clearTimeout(timeout);
-  }, [username]);
+  }, [username, loginContext.username]);
 
   const submit = async () => {
     let body: Partial<{

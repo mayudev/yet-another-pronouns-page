@@ -18,3 +18,7 @@ export interface Pronoun {
   order: number;
   type: PronounType;
 }
+
+export interface PronounEdited extends Pronoun {
+  initialOrder: number;
+}

@@ -1,7 +1,8 @@
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faTag, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import PronounsEditor from "../components/editor/PronounsEditor";
 import UserSettings from "../components/editor/UserSettings";
 import Heading from "../components/Heading";
 import { LoginContext } from "../lib/context/login";
@@ -33,8 +34,10 @@ function Editor() {
     <div className="editor">
       <Heading icon={faUser} value="Profile"></Heading>
       <UserSettings onMessage={onMessage} />
-      <div className="editor__pane"></div>
-      <div className="editor__pane"></div>
+
+      <Heading icon={faTag} value="Pronouns"></Heading>
+      <PronounsEditor onMessage={onMessage} />
+
       <Toaster
         position="top-center"
         toastOptions={{

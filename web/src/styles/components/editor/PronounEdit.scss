@@ -1,0 +1,46 @@
+.pronoun_edit__list {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.pronoun_edit {
+  border: 1px solid var(--accent);
+  display: inline-flex;
+  margin: 6px;
+}
+
+.pronoun_edit__button {
+  all: unset;
+  background: var(--background-primary);
+
+  padding: 12px;
+
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+
+  &:not(:disabled):hover {
+    background: var(--accent);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.pronoun_edit__type--active {
+  background: var(--accent);
+}
+
+.pronoun_edit__input {
+  all: unset;
+  display: block;
+  background: var(--background-primary);
+  border: 1px solid var(--background-secondary);
+
+  padding: 6px 8px;
+
+  &:focus {
+    border: 1px solid var(--accent);
+  }
+}

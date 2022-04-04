@@ -1,5 +1,5 @@
 .editor {
-  width: min(90vw, 1080px);
+  width: min(90vw, 720px);
   margin: auto;
 }
 
@@ -60,4 +60,13 @@
   background: var(--background-primary);
   color: var(--foreground);
   border-radius: var(--radius);
+}
+
+.pronouns_editor {
+  display: grid;
+}
+
+.pronoun_editor__pane {
+  display: inline-flex;
+  flex-direction: column;
 }

@@ -1,4 +1,4 @@
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactTooltip from "react-tooltip";
 import { PronounEdited, PronounType } from "../../lib/interfaces";
@@ -10,11 +10,12 @@ import PronounIcon from "../profile/PronounIcon";
 type Props = {
   pronoun: PronounEdited;
   pronounsCount: number;
+  onRemove(): void;
   onUpdate(newValue: PronounEdited): void;
   onRearrange(diff: number): void;
 };
 
-function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange }: Props) {
+function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange, onRemove }: Props) {
   const types = [
     PronounType.Primary,
     PronounType.Okay,
@@ -51,9 +52,17 @@ function PronounEdit({ pronoun, pronounsCount, onUpdate, onRearrange }: Props) {
     onRearrange(diff);
   };
 
+  // Remove current pronoun
+  const remove = () => {
+    onRemove();
+  };
+
   return (
     <div className="pronoun_edit">
       <div className="pronoun_edit__reorder">
+        <button onClick={() => remove()} className="pronoun_edit__button">
+          <FontAwesomeIcon icon={faRemove} />
+        </button>
         <button
           onClick={() => updateOrder(-1)}
           disabled={pronoun.order === 0}

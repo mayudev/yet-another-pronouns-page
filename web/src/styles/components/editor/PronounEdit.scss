@@ -1,12 +1,7 @@
-.pronoun_edit__list {
-  display: inline-flex;
-  flex-direction: column;
-}
-
 .pronoun_edit {
   border: 1px solid var(--accent);
   display: inline-flex;
-  margin: 6px;
+  margin: 6px 0;
 }
 
 .pronoun_edit__button {
@@ -35,6 +30,7 @@
 .pronoun_edit__input {
   all: unset;
   display: block;
+  flex-grow: 1;
   background: var(--background-primary);
   border: 1px solid var(--background-secondary);
 

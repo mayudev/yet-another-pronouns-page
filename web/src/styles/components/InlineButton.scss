@@ -1,0 +1,14 @@
+.inline_button {
+  all: unset;
+  margin: 12px 0;
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.inline_button__text {
+  padding-left: 6px;
+}

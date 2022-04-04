@@ -8,20 +8,6 @@
   justify-content: center;
 }
 
-.profile__edit {
-  margin: 12px 0;
-
-  transition: color 0.2s;
-
-  &:hover {
-    color: var(--accent);
-  }
-}
-
-.edit__text {
-  padding-left: 6px;
-}
-
 .header__username {
   font-size: 3rem;
 }

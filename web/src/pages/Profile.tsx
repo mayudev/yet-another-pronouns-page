@@ -9,6 +9,7 @@ import { faPencil, faTag } from "@fortawesome/free-solid-svg-icons";
 import Pronouns from "../components/profile/Pronouns";
 import { LoginContext } from "../lib/context/login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import InlineButton from "../components/InlineButton";
 
 type Params = {
   name: string;
@@ -55,9 +56,8 @@ function Profile() {
     return (
       <div className="profile">
         {current.id === loginContext.id ? (
-          <Link to="/editor" className="profile__edit">
-            <FontAwesomeIcon icon={faPencil} />
-            <span className="edit__text">Edit profile</span>
+          <Link to="/editor">
+            <InlineButton icon={faPencil} value="Edit profile" />
           </Link>
         ) : (
           ""

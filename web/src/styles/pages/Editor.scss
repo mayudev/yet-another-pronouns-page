@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+.editor__link {
+  display: block;
+}
+
 .editor__section {
   border: 1px solid var(--accent);
   border-radius: var(--radius);
@@ -77,4 +81,8 @@
 .pronoun_editor__pane {
   display: inline-flex;
   flex-direction: column;
+}
+
+.delete__text {
+  margin-bottom: 12px;
 }

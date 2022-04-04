@@ -139,8 +139,7 @@ function PronounsEditor(props: Props) {
       <button
         onClick={submit}
         disabled={!edited}
-        className="button button--long"
-        style={{ margin: "8px" }}
+        className="button button--long button--margin"
       >
         Save
       </button>

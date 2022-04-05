@@ -1,3 +1,24 @@
 .landing {
-  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.landing__heading {
+  font-size: 2rem;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.landing__subheading {
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.landing__button {
+  margin: 10px;
 }

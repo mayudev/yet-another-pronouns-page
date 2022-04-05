@@ -25,8 +25,8 @@ func NewSession(platform string, platformToken string, userID uuid.UUID) (string
 
 	sessionToken := hex.EncodeToString(b)
 
-	// Set expiry date
-	expiresAt := time.Now().Add(120 * time.Minute)
+	// Set expiry date to 3 days
+	expiresAt := time.Now().Add(3 * 24 * time.Hour)
 
 	// Add session to database
 	session := model.Session{

@@ -11,7 +11,7 @@ type Props = {
 };
 
 function UserSettings(props: Props) {
-  const loginContext = useContext(LoginContext);
+  const [loginContext, setLoginContext] = useContext(LoginContext);
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [usernameStatus, setUsernameStatus] = useState("");
@@ -89,9 +89,12 @@ function UserSettings(props: Props) {
       props.onMessage("Profile updated!");
       props.onUpdate(data.username);
 
-      // heresy
-      loginContext.username = data.username;
-      loginContext.bio = data.bio;
+      // Update context
+      setLoginContext({
+        ...loginContext,
+        username: data.username,
+        bio: data.bio,
+      });
     } catch (e) {
       console.log(e);
       props.onMessage("Something went wrong.");

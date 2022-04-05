@@ -19,7 +19,6 @@ function App() {
     avatar: "",
     bio: "",
     pronouns: [],
-    setUsername: () => {},
   });
 
   useEffect(() => {
@@ -58,7 +57,7 @@ function App() {
 
   return (
     <div className={`App ${ready ? "" : "covert"}`}>
-      <LoginContext.Provider value={loginState}>
+      <LoginContext.Provider value={[loginState, setLoginState]}>
         <Navigation />
         <Outlet />
         <span style={{ flex: 1 }} />

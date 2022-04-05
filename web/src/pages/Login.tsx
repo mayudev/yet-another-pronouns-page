@@ -7,7 +7,7 @@ import { LoginContext } from "../lib/context/login";
 import "../styles/pages/Login.scss";
 
 function Login() {
-  const context = useContext(LoginContext);
+  const [context] = useContext(LoginContext);
   const navigation = useNavigate();
 
   useEffect(() => {

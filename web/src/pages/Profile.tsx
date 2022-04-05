@@ -17,7 +17,7 @@ type Params = {
 function Profile() {
   const [current, setCurrent] = useState<UserData>();
   const [error, setError] = useState(0);
-  const loginContext = useContext(LoginContext);
+  const [loginContext] = useContext(LoginContext);
 
   let params = useParams<Params>();
 

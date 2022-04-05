@@ -21,7 +21,7 @@ function Editor() {
   const [current, setCurrent] = useState<UserData>();
 
   const navigate = useNavigate();
-  const loginContext = useContext(LoginContext);
+  const [loginContext] = useContext(LoginContext);
 
   useEffect(() => {
     // Allow only users that are logged in

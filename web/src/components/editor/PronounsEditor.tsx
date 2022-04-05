@@ -9,7 +9,7 @@ type Props = {
 };
 
 function PronounsEditor(props: Props) {
-  const loginContext = useContext(LoginContext);
+  const [loginContext, setLoginContext] = useContext(LoginContext);
   const [current, setCurrent] = useState<PronounEdited[]>([]);
   const [edited, setEdited] = useState(false);
 
@@ -111,7 +111,10 @@ function PronounsEditor(props: Props) {
 
       props.onMessage("Pronouns updated!");
 
-      loginContext.pronouns = current;
+      setLoginContext({
+        ...loginContext,
+        pronouns: current,
+      });
       setEdited(false);
     } catch (e) {
       console.log(e);

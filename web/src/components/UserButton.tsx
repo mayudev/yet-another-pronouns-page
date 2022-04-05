@@ -13,14 +13,11 @@ import "../styles/components/UserButton.scss";
 import InlineButton from "./InlineButton";
 
 function UserButton() {
-  const loginContext = useContext(LoginContext);
+  const [loginContext] = useContext(LoginContext);
 
   return (
     <>
-      <a
-        href="/api/login/logout"
-        className="navigation__entry navigation__entry--with_dropdown navigation__entry--primary"
-      >
+      <span className="navigation__entry navigation__entry--with_dropdown navigation__entry--primary">
         <FontAwesomeIcon icon={faCircleUser} />
         <span className="entry__title">{loginContext.username}</span>
         <div className="dropdown">
@@ -34,7 +31,7 @@ function UserButton() {
             <InlineButton icon={faRightFromBracket} value="Log out"></InlineButton>
           </a>
         </div>
-      </a>
+      </span>
     </>
   );
 }

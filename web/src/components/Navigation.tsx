@@ -7,7 +7,7 @@ import { LoginContext } from "../lib/context/login";
 import UserButton from "./UserButton";
 
 function Navigation() {
-  const context = useContext(LoginContext);
+  const [context] = useContext(LoginContext);
 
   const loginButton = (
     <Link className="navigation__entry navigation__entry--primary" to="login">

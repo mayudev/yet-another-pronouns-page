@@ -32,6 +32,14 @@ function Editor() {
     setCurrent(loginContext);
   }, [loginContext]);
 
+  const updateUsername = (newValue: string) => {
+    if (typeof current != "undefined") {
+      const currentCopy = { ...current };
+      currentCopy.username = newValue;
+      setCurrent(currentCopy);
+    }
+  };
+
   const onMessage = (message: string) => {
     toast(message);
   };
@@ -39,11 +47,11 @@ function Editor() {
   if (!current) return <h1>Loading...</h1>;
   return (
     <div className="editor">
-      <Link className="editor__link" to={"/@" + loginContext.username}>
+      <Link className="editor__link" to={"/@" + current.username}>
         <InlineButton icon={faAddressCard} value="View profile" />
       </Link>
       <Heading icon={faUser} value="Profile"></Heading>
-      <UserSettings onMessage={onMessage} />
+      <UserSettings onUpdate={updateUsername} onMessage={onMessage} />
 
       <Heading icon={faTag} value="Pronouns"></Heading>
       <PronounsEditor onMessage={onMessage} />

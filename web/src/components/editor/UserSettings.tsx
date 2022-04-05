@@ -7,6 +7,7 @@ import { UserData } from "../../lib/interfaces";
 
 type Props = {
   onMessage(message: string): void;
+  onUpdate(username: string): void;
 };
 
 function UserSettings(props: Props) {
@@ -86,6 +87,7 @@ function UserSettings(props: Props) {
       setBio(data.bio);
 
       props.onMessage("Profile updated!");
+      props.onUpdate(data.username);
 
       // heresy
       loginContext.username = data.username;

@@ -80,7 +80,7 @@ func UpdateUser(c *fiber.Ctx) error {
 	}
 
 	// Bio is to be updated
-	if len(updateUserData.Bio) > 0 {
+	if len(updateUserData.Bio) > 0 || (len(updateUserData.Bio) == 0 && len(updateUserData.Username) == 0) {
 		// Check max bio length
 		if len(updateUserData.Bio) > 1000 {
 			return c.Status(413).JSON(

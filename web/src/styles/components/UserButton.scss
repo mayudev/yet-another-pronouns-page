@@ -9,8 +9,9 @@
   border: 1px solid var(--accent);
   border-radius: var(--radius);
 
-  left: -90px;
+  right: 90px;
   right: 0;
+  min-width: 170px;
 
   color: var(--foreground-secondary);
 }
@@ -32,5 +33,11 @@
 
   .inline_button {
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .entry__title--desktop {
+    display: none;
   }
 }

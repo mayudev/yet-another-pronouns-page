@@ -19,7 +19,7 @@ function UserButton() {
     <>
       <span className="navigation__entry navigation__entry--with_dropdown navigation__entry--primary">
         <FontAwesomeIcon icon={faCircleUser} />
-        <span className="entry__title">
+        <span className="entry__title entry__title--desktop">
           {loginContext.username === "" ? "New User" : loginContext.username}
         </span>
         <div className="dropdown">

@@ -21,4 +21,7 @@ func AddUserRoutes(r fiber.Router) {
 
 	// Update current user
 	r.Post("/me", middleware.SessionMiddleware, userHandler.UpdateUser)
+
+	// Delete current user
+	r.Delete("/me", middleware.SessionMiddleware, userHandler.DeleteUser)
 }

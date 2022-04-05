@@ -146,8 +146,8 @@ func GetCurrentUser(c *fiber.Ctx) error {
 
 		return c.JSON(returnData)
 	} else {
-		return c.Status(401).JSON(util.ErrorMessage{
-			Status:  "Error",
+		return c.Status(400).JSON(util.ErrorMessage{
+			Status:  "error",
 			Message: "Incorrect platform",
 		})
 	}

@@ -1,4 +1,4 @@
-package login
+package discord
 
 import (
 	"encoding/json"

@@ -67,6 +67,12 @@ function Editor() {
             primary: "none",
             secondary: "none",
           },
+          style: {
+            background: "var(--background-primary)",
+            border: "1px solid var(--accent)",
+            color: "var(--foreground)",
+            borderRadius: "var(--radius)",
+          },
           duration: 1000,
         }}
       />

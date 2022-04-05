@@ -31,7 +31,7 @@ func DiscordLogin(c *fiber.Ctx) error {
 	return c.Redirect(
 		util.DISCORD_API_ENDPOINT +
 			"/oauth2/authorize?client_id=" + clientId +
-			"&redirect=" + url.QueryEscape(util.DISCORD_REDIRECT_URI) +
+			"&redirect=" + url.QueryEscape(util.GetDiscordRedirectUri()) +
 			"&response_type=code&scope=identify",
 	)
 }
@@ -53,7 +53,7 @@ func DiscordCallback(c *fiber.Ctx) error {
 	params.Add("client_secret", clientSecret)
 	params.Add("grant_type", "authorization_code")
 	params.Add("code", code)
-	params.Add("redirect_uri", util.DISCORD_REDIRECT_URI)
+	params.Add("redirect_uri", util.GetDiscordRedirectUri())
 
 	resp, err := http.PostForm(util.DISCORD_API_ENDPOINT+"/oauth2/token", params)
 

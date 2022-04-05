@@ -10,9 +10,6 @@ import (
 
 const DISCORD_API_ENDPOINT = "https://discord.com/api"
 
-// TODO move to env
-const DISCORD_REDIRECT_URI = "http://localhost:8000/api/callback/discord"
-
 func GetEnv(key string) string {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -20,4 +17,8 @@ func GetEnv(key string) string {
 	}
 
 	return os.Getenv(key)
+}
+
+func GetDiscordRedirectUri() string {
+	return GetEnv("URL") + "/api/callback/discord"
 }

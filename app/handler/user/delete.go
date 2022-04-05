@@ -12,7 +12,7 @@ import (
 func DeleteUser(c *fiber.Ctx) error {
 	token := c.Cookies("session_token")
 
-	session, err := middleware.GetSession(token)
+	session, err := middleware.DestroySession(token)
 	if err != nil {
 		// This shouldn't ever happen so don't worry about it (or should it?)
 		return c.SendStatus(401)

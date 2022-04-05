@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function DeleteAccount() {
+type Props = {
+  onMessage(message: string): void;
+};
+
+function DeleteAccount({ onMessage }: Props) {
   const [sure, setSure] = useState(false);
+  const navigate = useNavigate();
 
   const proceed = () => {
     setSure(true);
@@ -11,8 +17,29 @@ function DeleteAccount() {
     setSure(false);
   };
 
-  const deleteAccount = () => {
-    // todo
+  const deleteAccount = async () => {
+    try {
+      const resp = await fetch("/api/v1/me", {
+        method: "DELETE",
+      });
+
+      if (!resp.ok) {
+        if (resp.status === 401) {
+          onMessage("Session has expired.");
+        } else if (resp.status === 500) {
+          onMessage("Internal server error.");
+        } else {
+          onMessage("Something went wrong.");
+        }
+        throw new Error(resp.statusText);
+      }
+
+      onMessage("Account deleted!");
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
+    } catch (e) {}
   };
 
   return (

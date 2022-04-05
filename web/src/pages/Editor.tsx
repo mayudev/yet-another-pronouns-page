@@ -57,7 +57,7 @@ function Editor() {
       <PronounsEditor onMessage={onMessage} />
 
       <Heading icon={faCircleMinus} value="Delete account"></Heading>
-      <DeleteAccount />
+      <DeleteAccount onMessage={onMessage} />
 
       <Toaster
         position="top-center"

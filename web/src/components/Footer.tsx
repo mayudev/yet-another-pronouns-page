@@ -12,7 +12,6 @@ function Footer() {
       <a href="https://github.com/mayudev/yet-another-pronouns-page">
         <FooterItem icon={faGithub} />
       </a>
-      <FooterItem value="yet another pronouns page" />
 
       <span style={{ flex: 1 }} />
 
@@ -21,12 +20,6 @@ function Footer() {
         value="Switch theme"
         onClick={() => themeSwitcher.toggle()}
       />
-      {/* <FontAwesomeIcon className="footer__item" icon={faIceCream} />
-      <FontAwesomeIcon
-        className="footer__item"
-        icon={faCircleHalfStroke}
-        onClick={() => switchTheme.toggle()}
-      /> */}
     </footer>
   );
 }

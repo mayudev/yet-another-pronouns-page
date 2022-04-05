@@ -1,0 +1,36 @@
+.dropdown {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5 ease;
+  margin-top: 0.8rem;
+  display: none;
+
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+
+  left: -90px;
+  right: 0;
+
+  color: var(--foreground-secondary);
+}
+
+.navigation__entry--with_dropdown {
+  position: relative;
+}
+
+.navigation__entry--with_dropdown:hover > .dropdown,
+.dropdown:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+.dropdown__entry {
+  display: block;
+  padding: 12px;
+
+  .inline_button {
+    margin: 0;
+  }
+}

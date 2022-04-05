@@ -11,7 +11,7 @@ type Props = {
 function InlineButton(props: Props) {
   return (
     <button className="inline_button">
-      <FontAwesomeIcon icon={props.icon} />
+      <FontAwesomeIcon fixedWidth icon={props.icon} />
       <span className="inline_button__text">{props.value}</span>
     </button>
   );

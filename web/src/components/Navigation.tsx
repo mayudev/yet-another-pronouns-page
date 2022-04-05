@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/components/Navigation.scss";
 import { useContext } from "react";
 import { LoginContext } from "../lib/context/login";
+import UserButton from "./UserButton";
 
 function Navigation() {
   const context = useContext(LoginContext);
@@ -15,20 +16,13 @@ function Navigation() {
     </Link>
   );
 
-  const logoutButton = (
-    <a href="/api/login/logout" className="navigation__entry navigation__entry--primary">
-      <FontAwesomeIcon icon={faCircleUser} />
-      <span className="entry__title">Log out</span>
-    </a>
-  );
-
   return (
     <nav className="navigation">
-      <Link to="/" className="navigation__entr navigation__entry--link">
+      <Link to="/" className="navigation__entry navigation__entry--link">
         <span className="entry__title">yet another pronouns page</span>
       </Link>
       <span style={{ flex: 1 }} />
-      {context.loggedIn ? logoutButton : loginButton}
+      {context.loggedIn ? <UserButton /> : loginButton}
     </nav>
   );
 }

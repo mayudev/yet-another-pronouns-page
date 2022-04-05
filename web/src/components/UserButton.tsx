@@ -19,7 +19,9 @@ function UserButton() {
     <>
       <span className="navigation__entry navigation__entry--with_dropdown navigation__entry--primary">
         <FontAwesomeIcon icon={faCircleUser} />
-        <span className="entry__title">{loginContext.username}</span>
+        <span className="entry__title">
+          {loginContext.username === "" ? "New User" : loginContext.username}
+        </span>
         <div className="dropdown">
           <Link className="dropdown__entry" to={"/@" + loginContext.username}>
             <InlineButton icon={faUser} value="Show profile"></InlineButton>

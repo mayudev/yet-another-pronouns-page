@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoginContext } from "../../lib/context/login";
 
 type Props = {
   onMessage(message: string): void;
@@ -7,6 +8,7 @@ type Props = {
 
 function DeleteAccount({ onMessage }: Props) {
   const [sure, setSure] = useState(false);
+  const [loginContext, setLoginContext] = useContext(LoginContext);
   const navigate = useNavigate();
 
   const proceed = () => {
@@ -37,7 +39,20 @@ function DeleteAccount({ onMessage }: Props) {
       onMessage("Account deleted!");
 
       setTimeout(() => {
-        window.location.href = "/";
+        // Reset context
+        setLoginContext({
+          ...loginContext,
+          loggedIn: false,
+          id: "",
+          username: "",
+          pronouns: [],
+          avatar: "",
+          bio: "",
+          initalized: true,
+        });
+
+        // Redirect to home page
+        navigate("/");
       }, 1000);
     } catch (e) {}
   };
